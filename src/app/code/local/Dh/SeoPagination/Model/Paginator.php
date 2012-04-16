@@ -96,6 +96,25 @@ class Dh_SeoPagination_Model_Paginator extends Mage_Core_Model_Abstract
             $headBlock->addLinkRel('prev', $pager->getPreviousPageUrl());
         }
         
+        if (! Mage::helper('seopagination')->useCanonical()) {
+            $this->removeCanonical($headBlock);
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Should canonical links be used in conjunction with the next and previous
+     * seo links?  If not then remove from headblock here
+     * 
+     * @param Mage_Page_Block_Html_Head
+     * @return Dh_SeoPagination_Model_Paginator
+     */
+    public function removeCanonical($headBlock)
+    {
+        $categoryUrl = Mage::registry('current_category')->getUrl();
+        $headBlock->removeItem('link_rel', $categoryUrl);
+        
         return $this;
     }
 }

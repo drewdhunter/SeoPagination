@@ -1,4 +1,4 @@
-Magento SEO Pagination - Dh_SeoPagination
+Magento SEO Pagination - Dh_EmptyHandles
 ================================
 
 Module Overview
@@ -23,4 +23,6 @@ Licensed under http://creativecommons.org/licenses/by/3.0/ CC-BY 3.0
 
 Changelog
 -------------------------
+1.0.1 - Added system config option to alow user to choose whether or not canonical links are used in conjunction with next and previous in paginated sets.
+
 1.0.0 - Initial Commit

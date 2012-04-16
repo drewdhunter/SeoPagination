@@ -12,8 +12,9 @@ class Dh_SeoPagination_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Paths to module config options
      */
-    const XML_PATH_ENABLED = 'catalog/seo/seopagination_enabled';
-
+    const XML_PATH_ENABLED          = 'catalog/seo/seopagination_enabled';
+    const XML_PATH_USE_CANONICAL    = 'catalog/seo/seopagination_use_canonical';
+    
     /**
      * Check whether the module and module output are enabled in system config
      *
@@ -28,5 +29,16 @@ class Dh_SeoPagination_Helper_Data extends Mage_Core_Helper_Abstract
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Check if rel="canonical" is to be used in conjunction with 
+     * next and previous
+     *
+     * @return bool
+     */
+    public function useCanonical()
+    {
+        return Mage::getStoreConfigFlag(self::XML_PATH_USE_CANONICAL);
     }
 }
