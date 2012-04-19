@@ -23,6 +23,8 @@ Licensed under http://creativecommons.org/licenses/by/3.0/ CC-BY 3.0
 
 Changelog
 -------------------------
-1.0.1 - Added system config option to alow user to choose whether or not canonical links are used in conjunction with next and previous in paginated sets.
+1.0.2 - Fixed bug with view all page limits
+
+1.0.1 - Canonical links made optional in conjunction with seo pagination
 
 1.0.0 - Initial Commit
