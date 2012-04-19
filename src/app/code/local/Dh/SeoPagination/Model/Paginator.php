@@ -34,11 +34,12 @@ class Dh_SeoPagination_Model_Paginator extends Mage_Core_Model_Abstract
      */
     protected function _initProductCollection()
     {
-        $toolbar = $this->_getToolbar();
-        
-        if ($layer = Mage::getSingleton('catalog/layer')) {
+        if ($layer = Mage::getModel('catalog/layer')) {
             $this->_productCollection = $layer->getProductCollection();
-            $this->_productCollection->setPageSize($toolbar->getLimit());
+            $limit = (int)$toolbar->getLimit();
+            if ($limit) {
+                $this->_productCollection->setPageSize($limit);
+            }
         }
 
         return $this;
