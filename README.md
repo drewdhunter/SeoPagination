@@ -1,4 +1,4 @@
-Magento SEO Pagination - Dh_EmptyHandles
+Magento SEO Pagination - Dh_SeoPagination
 ================================
 
 Module Overview
