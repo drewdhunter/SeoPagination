@@ -30,15 +30,4 @@ class Dh_SeoPagination_Helper_Data extends Mage_Core_Helper_Abstract
         }
         return true;
     }
-    
-    /**
-     * Check if rel="canonical" is to be used in conjunction with 
-     * next and previous
-     *
-     * @return bool
-     */
-    public function useCanonical()
-    {
-        return Mage::getStoreConfigFlag(self::XML_PATH_USE_CANONICAL);
-    }
 }

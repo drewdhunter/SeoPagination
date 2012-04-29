@@ -23,6 +23,8 @@ Licensed under http://creativecommons.org/licenses/by/3.0/ CC-BY 3.0
 
 Changelog
 -------------------------
+1.0.3 - Removed ability for canonical links to be removed.
+
 1.0.2 - Fixed bug with view all page limits
 
 1.0.1 - Canonical links made optional in conjunction with seo pagination
