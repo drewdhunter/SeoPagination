@@ -3,7 +3,7 @@
     <modules>
         <Dh_SeoPagination>
             <active>true</active>
-            <codePool>local</codePool>
+            <codePool>community</codePool>
         </Dh_SeoPagination>
     </modules>
 </config>
