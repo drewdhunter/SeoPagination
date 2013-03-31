@@ -87,7 +87,12 @@ class Dh_SeoPagination_Model_Paginator extends Mage_Core_Model_Abstract
         
         //Determine exactly what needs to be output and 
         //add to the head block
-        if (!$pager->isFirstPage() && !$pager->isLastPage() && $numPages > 2 ) {
+        if ($pager->getCurrentPage() == 2) {
+            $moddedPreviousUrl =  str_replace('?p=1', '', $pager->getPreviousPageUrl());
+            $headBlock->addLinkRel('prev', $moddedPreviousUrl);
+            $headBlock->addLinkRel('next', $pager->getNextPageUrl());
+        }
+        elseif (!$pager->isFirstPage() && !$pager->isLastPage() && $numPages > 2 ) {
             $headBlock->addLinkRel('prev', $pager->getPreviousPageUrl());
             $headBlock->addLinkRel('next', $pager->getNextPageUrl());
         }
