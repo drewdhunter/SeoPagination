@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Dh_Seopagination>
+            <version>1.0.3</version>
+        </Dh_Seopagination>
+    </modules>
+    <global>
+        <events>
+            <controller_action_layout_render_before_catalog_category_view>
+                <observers>
+                    <seopagination>
+                        <type>Singleton</type>
+                        <class>Dh_Seopagination_Model_Observer</class>
+                        <method>doPagination</method>
+                    </seopagination>
+                </observers>
+            </controller_action_layout_render_before_catalog_category_view>
+        </events>
+        <models>
+            <seopagination>
+                <class>Dh_Seopagination_Model</class>
+            </seopagination>
+        </models>
+        <helpers>
+            <seopagination>
+                <class>Dh_Seopagination_Helper</class>
+            </seopagination>
+        </helpers>
+    </global>
+</config>

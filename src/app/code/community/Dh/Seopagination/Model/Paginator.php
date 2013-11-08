@@ -1,14 +1,14 @@
 <?php
 
 /**
- * SeoPagination Paginator
+ * Seopagination Paginator
  *  - Responsible for creating the rel="next" and rel="prev" links where necessary
  *
  * @category    Dh
- * @package     Dh_SeoPagination
+ * @package     Dh_Seopagination
  * @author      Drew Hunter <drewdhunter@gmail.com>
  */
-class Dh_SeoPagination_Model_Paginator extends Mage_Core_Model_Abstract
+class Dh_Seopagination_Model_Paginator extends Mage_Core_Model_Abstract
 {
     /*
      * @var Mage_Catalog_Model_Resource_Product_Collection $_productCollection
@@ -30,7 +30,7 @@ class Dh_SeoPagination_Model_Paginator extends Mage_Core_Model_Abstract
      * Initialise the product collection - it will be prepared based on the current 
      * category and layer
      *
-     * @return Dh_SeoPagination_Model_Paginator
+     * @return Dh_Seopagination_Model_Paginator
      */
     protected function _initProductCollection()
     {
@@ -75,7 +75,7 @@ class Dh_SeoPagination_Model_Paginator extends Mage_Core_Model_Abstract
      * 
      * So, decide here what should be output
      *
-     * @return Dh_SeoPagination_Model_Paginator
+     * @return Dh_Seopagination_Model_Paginator
      */
     public function createLinks()
     {

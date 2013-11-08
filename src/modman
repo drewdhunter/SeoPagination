@@ -1,2 +1,2 @@
-src/app/code/local/Dh/SeoPagination         app/code/local/Dh/SeoPagination
-src/app/etc/modules/Dh_SeoPagination.xml    app/etc/modules/Dh_SeoPagination.xml
+src/app/code/community/Dh/Seopagination     app/code/community/Dh/Seopagination
+src/app/etc/modules/Dh_Seopagination.xml    app/etc/modules/Dh_Seopagination.xml

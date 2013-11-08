@@ -1,19 +1,19 @@
 <?php
 
 /**
- * SeoPagination Observer
+ * Seopagination Observer
  *
  * @category    Dh
- * @package     Dh_SeoPagination
+ * @package     Dh_Seopagination
  * @author      Drew Hunter <drewdhunter@gmail.com>
  */
-class Dh_SeoPagination_Model_Observer
+class Dh_Seopagination_Model_Observer
 {
     /**
      * doPagination() - kick off the process of adding the next and prev 
      * rel links to category pages where necessary
      *
-     * @return Dh_SeoPagination_Model_Observer
+     * @return Dh_Seopagination_Model_Observer
      */
     public function doPagination()
     {

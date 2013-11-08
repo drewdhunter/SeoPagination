@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <Dh_SeoPagination>
+        <Dh_Seopagination>
             <active>true</active>
             <codePool>community</codePool>
-        </Dh_SeoPagination>
+        </Dh_Seopagination>
     </modules>
 </config>
