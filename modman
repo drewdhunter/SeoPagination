@@ -1,2 +1,3 @@
 src/app/code/community/Dh/SeoPagination    app/code/community/Dh/SeoPagination
 src/app/etc/modules/Dh_SeoPagination.xml   app/etc/modules/Dh_SeoPagination.xml
+composer.json                              composer.json
