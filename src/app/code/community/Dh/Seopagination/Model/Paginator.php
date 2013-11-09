@@ -74,7 +74,7 @@ class Dh_Seopagination_Model_Paginator extends Mage_Core_Model_Abstract
      *
      * @return Dh_Seopagination_Model_Paginator
      */
-    public function createLinks()
+    public function paginate()
     {
         $pager = $this->_getPager();
         $numPages = count($pager->getPages());
