@@ -1,12 +1,9 @@
 <?php
 
 /**
- * Seopagination Paginator
- *  - Responsible for creating the rel="next" and rel="prev" links where necessary
- *
- * @category    Dh
- * @package     Dh_Seopagination
- * @author      Drew Hunter <drewdhunter@gmail.com>
+ * @category Dh
+ * @package  Dh_Seopagination
+ * @author   Drew Hunter <drewdhunter@gmail.com>
  */
 class Dh_Seopagination_Model_Paginator extends Mage_Core_Model_Abstract
 {

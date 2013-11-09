@@ -1,11 +1,9 @@
 <?php
 
 /**
- * Seopagination Observer
- *
- * @category    Dh
- * @package     Dh_Seopagination
- * @author      Drew Hunter <drewdhunter@gmail.com>
+ * @category Dh
+ * @package  Dh_Seopagination
+ * @author   Drew Hunter <drewdhunter@gmail.com>
  */
 class Dh_Seopagination_Model_Observer
 {
