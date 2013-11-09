@@ -15,14 +15,9 @@ class Dh_Seopagination_Model_Observer
      */
     public function doPagination()
     {
-        try {
-            if (Mage::helper('seopagination')->isModuleEnabled()) {
-                $paginator = Mage::getModel('seopagination/paginator');        
-                $paginator->createLinks();
-            }
-        }
-        catch(Exception $e) {
-            Mage::logException($e);
+        if (Mage::helper('seopagination')->isModuleEnabled()) {
+            $paginator = Mage::getModel('seopagination/paginator');
+            $paginator->createLinks();
         }
         
         return $this;
