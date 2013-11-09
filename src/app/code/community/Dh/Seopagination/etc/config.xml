@@ -9,23 +9,23 @@
         <events>
             <controller_action_layout_render_before_catalog_category_view>
                 <observers>
-                    <seopagination>
+                    <dh_seopagination>
                         <type>Singleton</type>
                         <class>Dh_Seopagination_Model_Observer</class>
                         <method>doPagination</method>
-                    </seopagination>
+                    </dh_seopagination>
                 </observers>
             </controller_action_layout_render_before_catalog_category_view>
         </events>
         <models>
-            <seopagination>
+            <dh_seopagination>
                 <class>Dh_Seopagination_Model</class>
-            </seopagination>
+            </dh_seopagination>
         </models>
         <helpers>
-            <seopagination>
+            <dh_seopagination>
                 <class>Dh_Seopagination_Helper</class>
-            </seopagination>
+            </dh_seopagination>
         </helpers>
     </global>
 </config>
