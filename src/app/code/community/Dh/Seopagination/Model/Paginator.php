@@ -1,100 +1,154 @@
 <?php
 
 /**
- * @category Dh
- * @package  Dh_Seopagination
- * @author   Drew Hunter <drewdhunter@gmail.com>
+ * This file is part of the Dh_Seopagination module for Magento.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * PHP version 5.3
+ *
+ * @category  Dh
+ * @package   Dh_Seopagination
+ * @author    Drew Hunter <drewdhunter@gmail.com>
+ * @copyright 2013 Drew Hunter
+ * @license   http://opensource.org/licenses/MIT MIT License (MIT)
+ * @link      https://github.com/drewhunter/SeoPagination
  */
-class Dh_Seopagination_Model_Paginator extends Mage_Core_Model_Abstract
+
+/**
+ * Paginator injects seo pagination links when/where applicable
+ * into the head element on category pages.
+ *
+ * @category  Dh
+ * @package   Dh_Seopagination
+ * @author    Drew Hunter <drewdhunter@gmail.com>
+ * @copyright 2013 Drew Hunter
+ * @license   http://opensource.org/licenses/MIT MIT License (MIT)
+ * @link      https://github.com/drewhunter/SeoPagination
+ */
+class Dh_Seopagination_Model_Paginator implements Dh_Seopagination_Model_PaginatorInterface
 {
-    /*
-     * @var Mage_Catalog_Model_Resource_Product_Collection $_productCollection
-     */
-    protected $_productCollection;
-    
-     /*
-     * @var Mage_Catalog_Block_Product_List_Toolbar $_toolbar
-     */
-    protected $_toolbar;
-    
-    public function _construct()
-    {
-        $this->_initProductCollection();
-        parent::_construct();
-    }
-    
     /**
-     * Initialise the product collection - it will be prepared based on the current 
-     * category and layer
-     *
-     * @return Dh_Seopagination_Model_Paginator
+     * @var Mage_Page_Block_Html_Head
      */
-    protected function _initProductCollection()
+    private $_headBlock;
+
+    /**
+     * @var Mage_Page_Block_Html_Pager
+     */
+    private $_pagerBlock;
+
+    /**
+     * Set the required services
+     *
+     * @param array $services required services
+     *
+     * @throws InvalidArgumentException
+     */
+    public function __construct(array $services = array())
     {
-        if ($layer = Mage::getSingleton('catalog/layer')) {
-            $this->_productCollection = $layer->getProductCollection();
-            
-            $limit = (int)$this->_getToolbar()->getLimit();
-            if ($limit) {
-                $this->_productCollection->setPageSize($limit);
-            }
+        if (! isset($services['headBlock'])) {
+            throw new InvalidArgumentException(
+                'Instance of Mage_Page_Block_Html_Head required');
         }
 
-        return $this;
-    }
-    
-    protected function _getToolbar()
-    {
-        if (is_null($this->_toolbar)) {
-            $this->_toolbar = Mage::app()->getLayout()->createBlock('catalog/product_list_toolbar');
+        if (! isset($services['pagerBlock'])) {
+            throw new InvalidArgumentException(
+                'Instance of Mage_Page_Block_Html_Pager required');
         }
-        
-        return $this->_toolbar;
+
+        $this->_setHeadBlock($services['headBlock']);
+        $this->_setPagerBlock($services['pagerBlock']);
     }
-    
+
     /**
-     * Initialise the pager and toolbar etc
+     * Set the head block
+     *   - used to set prev/next links on
      *
+     * @param Mage_Page_Block_Html_Head $headBlock magento head block instance
+     *
+     * @return null
+     */
+    private function _setHeadBlock(Mage_Page_Block_Html_Head $headBlock)
+    {
+        $this->_headBlock = $headBlock;
+    }
+
+    /**
+     * Set the pager block
+     *   - used to retrieve the previous and next urls
+     *
+     * @param Mage_Page_Block_Html_Pager $pagerBlock magento pager block instance
+     *
+     * @return null
+     */
+    private function _setPagerBlock(Mage_Page_Block_Html_Pager $pagerBlock)
+    {
+        $this->_pagerBlock = $pagerBlock;
+    }
+
+    /**
+     * @return Mage_Page_Block_Html_Head
+     */
+    public function getHeadBlock()
+    {
+        return $this->_headBlock;
+    }
+
+    /**
      * @return Mage_Page_Block_Html_Pager
      */
-    protected function _getPager()
+    public function getPagerBlock()
     {
-        return Mage::app()->getLayout()->createBlock('page/html_pager')
-                ->setLimit($this->_getToolbar()->getLimit())
-                ->setCollection($this->_productCollection);       
+        return $this->_pagerBlock;
     }
-    
+
     /**
-     * Create the next and prev rel links. There are 3 possible scenarios:
-     * 1. Both next and Prev to be output
-     * 2. Only next to be output
-     * 3. Only prev to be output
-     * 
-     * So, decide here what should be output
+     * If more than 1 page exists in the collection then attempt to add a next
+     * and prev link.
      *
-     * @return Dh_Seopagination_Model_Paginator
+     * @return null
      */
     public function paginate()
     {
-        $pager = $this->_getPager();
-        $numPages = count($pager->getPages());
+        if ($this->_pagerBlock->getTotalNum() > 1) {
+            $this->_addPrevLink();
+            $this->_addNextLink();
+        }
+    }
 
-        //Need this to add the links to later on
-        $headBlock = Mage::app()->getLayout()->getBlock('head');
-        
-        //Determine exactly what needs to be output and 
-        //add to the head block
-        if (!$pager->isFirstPage() && !$pager->isLastPage() && $numPages > 2 ) {
-            $headBlock->addLinkRel('prev', $pager->getPreviousPageUrl());
-            $headBlock->addLinkRel('next', $pager->getNextPageUrl());
+    /**
+     * Attempt to add a prev link - this will only be possible if we are not on
+     * the first page.
+     *
+     * @return bool
+     */
+    private function _addPrevLink()
+    {
+        if (! $this->_pagerBlock->isFirstPage()) {
+            $this->_headBlock
+                ->addLinkRel('prev', $this->_pagerBlock->getPreviousPageUrl());
+            return true;
         }
-        elseif($pager->isFirstPage() && $numPages > 1) {
-            $headBlock->addLinkRel('next', $pager->getNextPageUrl());
+
+        return false;
+    }
+
+    /**
+     * Attempt to add a next link - this will only be possible
+     * if we are not on the last page.
+     *
+     * @return bool
+     */
+    private function _addNextLink()
+    {
+        if (! $this->_pagerBlock->isLastPage()) {
+            $this->_headBlock
+                ->addLinkRel('next', $this->_pagerBlock->getNextPageUrl());
+            return true;
         }
-        elseif($pager->isLastPage() && $numPages > 1) {
-            $headBlock->addLinkRel('prev', $pager->getPreviousPageUrl());
-        }
-        
-        return $this;
+
+        return false;
     }
 }

@@ -17,7 +17,7 @@
  */
 
 /**
- * Data Helper.
+ * Paginator Interface
  *
  * @category  Dh
  * @package   Dh_Seopagination
@@ -26,16 +26,10 @@
  * @license   http://opensource.org/licenses/MIT MIT License (MIT)
  * @link      https://github.com/drewhunter/SeoPagination
  */
-class Dh_Seopagination_Helper_Data extends Mage_Core_Helper_Abstract
+interface Dh_Seopagination_Model_PaginatorInterface
 {
     /**
-     * @return false|Dh_Seopagination_Model_Paginator
+     * @return null
      */
-    public function initPaginator()
-    {
-        $services = Mage::getModel('dh_seopagination/services')
-            ->getServices();
-
-        return Mage::getModel('dh_seopagination/paginator', $services);
-    }
+    public function paginate();
 }

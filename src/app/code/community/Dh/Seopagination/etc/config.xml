@@ -10,7 +10,7 @@
             <controller_action_layout_render_before_catalog_category_view>
                 <observers>
                     <dh_seopagination>
-                        <class>Dh_Seopagination_Model_Observer</class>
+                        <class>dh_seopagination/observer</class>
                         <method>doPagination</method>
                     </dh_seopagination>
                 </observers>
