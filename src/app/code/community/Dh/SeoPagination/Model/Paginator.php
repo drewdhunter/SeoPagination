@@ -70,6 +70,15 @@ class Dh_SeoPagination_Model_Paginator extends Mage_Core_Model_Abstract
             return $pager->getPreviousPageUrl();
         }
 
+        return $this->getFirstPageUrl();
+    }
+
+    /**
+     * @return string
+     */
+    private function getFirstPageUrl()
+    {
+        $pager = $this->getPager();
         return $pager->getPagerUrl([$pager->getPageVarName() => null]);
     }
 
@@ -79,7 +88,7 @@ class Dh_SeoPagination_Model_Paginator extends Mage_Core_Model_Abstract
         $headBlock = Mage::app()->getLayout()->getBlock('head');
         $pager = $this->getPager();
 
-        $headBlock->removeItem('link_rel', $pager->getPagerUrl([$pager->getPageVarName() => null]));
+        $headBlock->removeItem('link_rel', $this->getFirstPageUrl());
         $headBlock->addLinkRel('canonical', $pager->getPagerUrl());
 
         if ($pager->getCurrentPage() < $pager->getLastPageNum()) {
