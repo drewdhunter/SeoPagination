@@ -2,6 +2,8 @@
 
 class Dh_SeoPagination_Model_Paginator extends Mage_Core_Model_Abstract
 {
+    const XML_PATH_NOINDEX_FOLLOW          = 'catalog/seo/seopagination_noindex';
+    
     /**
      * @var int
      */
@@ -97,6 +99,7 @@ class Dh_SeoPagination_Model_Paginator extends Mage_Core_Model_Abstract
 
         if ($pager->getCurrentPage() > 1) {
             $headBlock->addLinkRel('prev', $this->getPreviousPageUrl());
+            if(Mage::getStoreConfigFlag(self::XML_PATH_NOINDEX_FOLLOW)) $headBlock->setRobots('noindex,follow');
         }
     }
 }
