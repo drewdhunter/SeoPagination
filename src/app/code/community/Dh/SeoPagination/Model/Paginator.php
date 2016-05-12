@@ -79,7 +79,7 @@ class Dh_SeoPagination_Model_Paginator extends Mage_Core_Model_Abstract
     private function getFirstPageUrl()
     {
         $pager = $this->getPager();
-        return $pager->getPagerUrl([$pager->getPageVarName() => null]);
+        return $pager->getPagerUrl(array($pager->getPageVarName() => null));
     }
 
     public function createLinks()
